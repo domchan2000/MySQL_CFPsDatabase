@@ -7,7 +7,7 @@ can be classified into these three categories: Conferences, Journals and Books.
 
 We want to design a database to record all the CFPs. Below are the links for three recent events (one
 example from each kind of CFP) for which we have received the CFP announcements:
-• Conference CFP: http://cs-conferences.acadiau.ca/ant-21/#callforPapers
-• Journal CFP: https://www.journals.elsevier.com/journal-of-information-security-andapplications/call-for-papers/special-issue-on-trends-in-cybersecurity
 
-Task 1: Identify the entities, attributes, relationships and business rules.
+• Conference CFP: http://cs-conferences.acadiau.ca/ant-21/#callforPapers
+
+• Journal CFP: https://www.journals.elsevier.com/journal-of-information-security-andapplications/call-for-papers/special-issue-on-trends-in-cybersecurity
