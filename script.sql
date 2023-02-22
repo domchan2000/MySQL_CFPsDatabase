@@ -76,3 +76,28 @@ create trigger trig5 after insert on EventBook for each row update CFPCOUNT SET 
 CFPTYPE IN (3,4);
 create trigger trig6 after delete on EventBook for each row update CFPCOUNT SET NO = NO - 1 WHERE
 CFPTYPE IN (3,4);
+
+--Conference
+Select Year(EvDate) as Year, Month(EvDate) as Month, count(*) as Count from EventConference group
+by Year(EvDate), Month(EvDate);
+--Journal
+Select Temp.Year, Temp.Month, Count(*) as Count
+From (Select EventID, Year(MIN(ActivityDate)) as Year, Month(Min(ActivityDate)) as Month from
+JourActivities group by EventID) as Temp
+Group by Temp.Year, Temp.Month;
+--Book
+Select Temp.Year, Temp.Month, Count(*) as Count
+From (Select EventID, Year(MIN(ActivityDate)) as Year, Month(Min(ActivityDate)) as Month from
+BookActivities group by EventID) as Temp
+Group by Temp.Year, Temp.Month;
+
+--note: need to replace CurrentDate with some actual date
+--conference
+Select EventID, Evdate from EventConference where EvDate > CurrentDate order by Evdate ASC fetch 1
+first rows only;
+--journal
+Select EventID, MIN(ActivityDate) as earliest_date from JourActivities where ActivityDate > CurrentDate
+group by EventID order by earliest_date ASC Fetch 1 first rows only;
+--book
+Select EventID, MIN(ActivityDate) as earliest_date from BookActivities where ActivityDate > CurrentDate
+group by EventID order by earliest_date ASC Fetch 1 first rows only;
