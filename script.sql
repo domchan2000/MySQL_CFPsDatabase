@@ -58,3 +58,21 @@ PRIMARY KEY (EventName, PeopleName),
 FOREIGN KEY (EventName) REFERENCES Event(Name),
 FOREIGN KEY (PeopleName) REFERENCES People(Name)
 );
+
+Create table CFPcount(event_type int, NO int);
+insert into CFPcount values(1, 0); --conference
+insert into CFPcount values(2, 0); --journal
+insert into CFPcount values(3, 0); --book
+insert into CFPcount values(4, 0); --total
+create trigger trig1 after insert on EventConference for each row update CFPCOUNT SET NO = NO + 1
+WHERE CFPTYPE IN (1,4);
+create trigger trig2 after delete on EventConference for each row update CFPCOUNT SET NO = NO - 1
+WHERE CFPTYPE IN (1,4);
+create trigger trig3 after insert on EventJournal for each row update CFPCOUNT SET NO = NO + 1
+WHERE CFPTYPE IN (2,4);
+create trigger trig4 after delete on EventJournal for each row update CFPCOUNT SET NO = NO - 1
+WHERE CFPTYPE IN (2,4);
+create trigger trig5 after insert on EventBook for each row update CFPCOUNT SET NO = NO + 1 WHERE
+CFPTYPE IN (3,4);
+create trigger trig6 after delete on EventBook for each row update CFPCOUNT SET NO = NO - 1 WHERE
+CFPTYPE IN (3,4);
